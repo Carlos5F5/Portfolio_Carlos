@@ -1,0 +1,22 @@
+---
+const { title, description, link, image } = Astro.props;
+---
+
+<article class="flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+  <div class="h-48 w-full overflow-hidden">
+    <img src={image} alt={`Imagen de ${title}`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+  </div>
+  <div class="flex-1 p-5 flex flex-col justify-between">
+    <div>
+      <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{title}</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-300">{description}</p>
+    </div>
+    <a
+      href={link}
+      target="_blank"
+      class="mt-4 inline-block text-blue-600 dark:text-blue-400 font-medium hover:underline"
+    >
+      Ver repositorio
+    </a>
+  </div>
+</article>

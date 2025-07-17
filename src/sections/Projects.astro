@@ -1,0 +1,328 @@
+---
+// No necesitas props aquí por ahora, pero puedes integrarlos fácilmente si deseas hacerlo dinámico
+
+// Configuración de categorías y proyectos
+const projectCategories: Array<{
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  projects: Array<{
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    technologies: string[];
+    features: string[];
+    link: string;
+    linkText: string;
+    linkType: string;
+  }>;
+}> = [
+  {
+    id: 'web-development',
+    title: 'Desarrollo Web / Fullstack',
+    description: 'Aplicaciones web modernas y escalables',
+    icon: 'code',
+    color: 'blue',
+    projects: [
+      {
+        id: 'educational-platform',
+        title: 'Plataforma educativa en React',
+        description: 'Plataforma con clases especializadas, cursos modulares, reproductor propio y mas características únicas.',
+        image: 'https://i.pinimg.com/736x/86/65/c0/8665c0abab4c665e69aae3eba44d17cb.jpg',
+        technologies: ['React', 'JavaScript'],
+        features: ['Clases especializadas', 'Video streaming', 'Base de Datos'],
+        link: 'https://ppmaestrohaxorclases.pages.dev/',
+        linkText: 'Ver plataforma',
+        linkType: 'demo'
+      },
+
+    ]
+  },
+  {
+    id: 'cybersecurity',
+    title: 'Hacking / Ciberseguridad',
+    description: 'Herramientas de pentesting y análisis de seguridad',
+    icon: 'shield',
+    color: 'red',
+    projects: [
+      {
+        id: 'osint-tool',
+        title: 'CURSO Y MENTORIAS DE OSINT',
+        description: 'Concienciación de la inteligencia de las fuentes abiertas, y técnicas avanzadas de recolección y triangulación de información',
+        image: 'https://i.pinimg.com/1200x/11/a8/d0/11a8d0f3986426079a20c7f18cbb217f.jpg',
+        technologies: ['OSINT', 'Bash', 'Investigación'],
+        features: ['Fingerprinting', 'Metadata', 'Google Dorks'],
+        link: 'https://github.com/tuusuario/osint-tool',
+        linkText: '',
+        linkType: 'github'
+      },
+      {
+        id: 'WIFI - EXTRACTOR',
+        title: 'WIFI - EXTRACTOR',
+        description: 'Herramienta de POST - EXPLOTACIÓN en distintas versiones para la extracción de redes y credenciales WI-FI por la que ha pasado el dispostivo, con variedad de opciones que protegen la identidad del RED TEAM',
+        image: 'https://i.pinimg.com/1200x/a5/71/9d/a5719dccfd424471eb6f35766be1a316.jpg',
+        technologies: ['Python', 'Netsh', 'PowerShell'],
+        features: ['POST-EXPLOTACIÓN', 'Python Client', 'Remote Control'],
+        link: 'https://github.com/Carlos5F5/WI-FI_Post-Explotation_Extractor/tree/main',
+        linkText: 'Ver repositorio',
+        linkType: 'github'
+      },
+      {
+        id: 'Escaner-DVR',
+        title: 'DVR Scanner - CVE - 2018 - 9995',
+        description: 'Una herramienta que permite escanear dispositivos DVR en busca de vulnerabilidades conocidas.',
+        image: 'https://i.pinimg.com/736x/dc/d0/32/dcd0327768635340cbacf85460898051.jpg',
+        technologies: ['Python'],
+        features: ['Bash',' CMD',' PowerShell Scripting', 'Hackiing Web Cam'],
+        link: 'https://github.com/Carlos5F5/DVR-VulnScanner',
+        linkText: 'Ver Repositorio',
+        linkType: 'github'
+      },
+      {
+        id: 'CREDENTIAL-EXTRACTOR',
+        title: 'CREDENTIAL-EXTRACTOR - INFOSTEALER',
+        description: 'Herramienta de Extracción de Credenciales de navegadores, e información del dispositivo explotado',
+        image: 'https://i.pinimg.com/736x/24/67/98/246798776768bd9f341754095daa02fc.jpg',
+        technologies: ['Python', 'Powershell'],
+        features: ['POST - EXPLOTACIÓN', 'Python', 'File Transfer'],
+        link: 'https://github.com/Carlos5F5/InfoStealer_BySEB4S',
+        linkText: 'Ver Repositorio',
+        linkType: 'demo'
+      },
+    ]
+  },
+  {
+    id: 'Automatización',
+    title: 'Automatización',
+    description: 'Herramientas y scripts para automatizar tareas',
+    icon: 'automation',
+    color: 'green',
+    projects: [
+      {
+        id: 'gofile-uploader',
+        title: 'Gofile Uploader',
+        description: 'Una herramienta que sirve para la transferencia de archivos cuando nos encontramos en un servidor o VPS sin interfaz gráfica, y en distintas versiones como para CMD, MAC / LINUX y Powershell.',
+        image: 'https://i.pinimg.com/736x/25/76/79/2576790db05375a6c42ed3d90b350ae2.jpg',
+        technologies: ['BASH', 'Python', 'CMD', 'PowerShell'],
+        features: ['Bash - CMD - PowerShell Scripting', 'File Streaming', 'File Transfer'],
+        link: 'https://github.com/Carlos5F5/Gofile_Crazy_Uploader',
+        linkText: 'Ver Repositorio',
+        linkType: 'demo'
+      },
+
+
+    ]
+  },
+];
+
+// Configuración de iconos
+const icons: Record<string, string> = {
+  code: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>`,
+  shield: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>`,
+  external: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>`,
+  github: `<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>`
+};
+
+// Configuración de colores por categoría
+const colorClasses: Record<string, {
+  gradient: string;
+  text: string;
+  hover: string;
+  glow: string;
+  hoverText: string;
+  linkText: string;
+}> = {
+  blue: {
+    gradient: 'from-blue-500 to-cyan-600',
+    text: 'text-blue-400',
+    hover: 'hover:border-cyan-500/50',
+    glow: 'from-cyan-500/20 to-blue-500/20',
+    hoverText: 'group-hover:text-cyan-400',
+    linkText: 'text-cyan-400 hover:text-cyan-300'
+  },
+  red: {
+    gradient: 'from-red-500 to-orange-600',
+    text: 'text-red-400',
+    hover: 'hover:border-red-500/50',
+    glow: 'from-red-500/20 to-orange-500/20',
+    hoverText: 'group-hover:text-red-400',
+    linkText: 'text-red-400 hover:text-red-300'
+  },
+  green: {
+    gradient: 'from-green-500 to-teal-600',
+    text: 'text-green-400',
+    hover: 'hover:border-green-500/50',
+    glow: 'from-green-500/20 to-teal-500/20',
+    hoverText: 'group-hover:text-green-400',
+    linkText: 'text-green-400 hover:text-green-300'
+  },
+};
+
+// Función para obtener el color de la tecnología
+function getTechColor(tech: string): string {
+  const colors: Record<string, string> = {
+    'React': 'bg-blue-500/90',
+    'JavaScript': 'bg-yellow-500/90',
+    'Python': 'bg-green-500/90',
+    'Dashboard': 'bg-orange-500/90',
+    'OSINT': 'bg-red-500/90',
+    'Automation': 'bg-purple-500/90',
+    'C2': 'bg-red-500/90',
+    'WebSocket': 'bg-blue-500/90'
+  };
+  return colors[tech] || 'bg-gray-500/90';
+}
+---
+
+<section id="projects" class="py-20 px-6 max-w-6xl mx-auto relative z-10">
+  <!-- Background effects -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+  </div>
+
+  <!-- Section Header -->
+  <div class="text-center mb-16 relative">
+    <h2 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+      <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+        Mis Proyectos
+      </span>
+    </h2>
+    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto rounded-full"></div>
+    <p class="text-gray-400 mt-4 text-lg">
+      Veamos un poco de lo que he hecho...  Espero que te guste.
+    </p>
+  </div>
+
+  <!-- Project Categories -->
+  {projectCategories.map((category, categoryIndex) => (
+    <div class={categoryIndex < projectCategories.length - 1 ? 'mb-20' : ''}>
+      <!-- Category Header -->
+      <div class="flex items-center gap-3 mb-8">
+  
+        <div>
+          <h3 class={`text-2xl font-semibold ${colorClasses[category.color]?.text}`}>
+            {category.title}
+          </h3>
+          <p class="text-gray-500 text-sm">{category.description}</p>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {category.projects.map((project) => (
+          <div class={`group relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden border border-gray-700/50 ${colorClasses[category.color]?.hover} transition-all duration-500 hover:scale-105`}>
+            <!-- Glow effect -->
+            <div class={`absolute inset-0 bg-gradient-to-r ${colorClasses[category.color]?.glow} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+            
+            <!-- Image container with overlay -->
+            <div class="relative overflow-hidden">
+              <img 
+                src={project.image}
+                alt={project.title}
+                class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" 
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <!-- Tech stack badges -->
+              <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span class={`px-2 py-1 ${getTechColor(tech)} text-white text-xs rounded-full`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Project content -->
+            <div class="p-6 relative z-10">
+              <h4 class={`text-xl font-bold text-white mb-3 ${colorClasses[category.color]?.hoverText} transition-colors`}>
+                {project.title}
+              </h4>
+              <p class="text-gray-300 mb-4 leading-relaxed">
+                {project.description}
+              </p>
+              
+              <!-- Features list -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.features.map((feature) => (
+                  <span class="text-xs px-2 py-1 bg-gray-700 text-gray-300 rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Project link -->
+              <a 
+                href={project.link}
+                target="_blank" 
+                class={`inline-flex items-center gap-2 ${colorClasses[category.color]?.linkText} transition-colors group/link`}
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path set:html={icons[project.linkType]} />
+                </svg>
+                {project.linkText}
+                <svg class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path set:html={icons.external} />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</section>
+
+<style>
+  /* Smooth hover animations */
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+  }
+  
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+  
+  .group:hover .group-hover\:text-cyan-400 {
+    color: #22d3ee;
+  }
+  
+  .group:hover .group-hover\:text-red-400 {
+    color: #f87171;
+  }
+  
+  .group\/link:hover .group-hover\/link\:translate-x-1 {
+    transform: translateX(0.25rem);
+  }
+  
+  /* Pulse animation for background effects */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+  }
+  
+  .animate-pulse {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .grid.lg\:grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .text-4xl.lg\:text-5xl {
+      font-size: 2.25rem;
+    }
+    
+    .p-6 {
+      padding: 1.25rem;
+    }
+  }
+</style>
